@@ -1,6 +1,6 @@
 <?php
 
-namespace ImageLoader\exceptions;
+namespace dierme\loader\ImageLoader\exceptions;
 
 /**
  * Class UrlException

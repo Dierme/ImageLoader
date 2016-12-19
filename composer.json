@@ -10,7 +10,7 @@
   ],
   "minimum-stability": "stable",
   "autoload": {
-    "psr-4": {"ImageLoader\\": "ImageLoader/"}
+    "psr-4": {"dierme\\loader\\": "ImageLoader/"}
   },
   "require": {
     "php": ">=5.3.0"

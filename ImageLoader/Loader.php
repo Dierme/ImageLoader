@@ -1,9 +1,9 @@
 <?php
 
-namespace ImageLoader;
+namespace dierme\loader\ImageLoader;
 
-use ImageLoader\exceptions\UrlException;
-use ImageLoader\exceptions\FileException;
+use dierme\loader\ImageLoader\exceptions\UrlException;
+use dierme\loader\ImageLoader\exceptions\FileException;
 
 /**
  * Class Loader
