@@ -1,13 +1,13 @@
 <?php
 
-namespace imageLoader;
+namespace ImageLoader;
 
-use imageLoader\exceptions\UrlException;
-use imageLoader\exceptions\FileException;
+use ImageLoader\exceptions\UrlException;
+use ImageLoader\exceptions\FileException;
 
 /**
  * Class Loader
- * @package imageLoader
+ * @package ImageLoader
  *
  * Encapsulates main logic of the project.
  * Contains filters for Url, downloads image, saves image.

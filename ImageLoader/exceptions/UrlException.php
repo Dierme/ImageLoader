@@ -1,12 +1,12 @@
 <?php
 
-namespace imageLoader\exceptions;
+namespace ImageLoader\exceptions;
 
 /**
  * Class UrlException
  * Custom exception which signalize that there is a problem with a url
  *
- * @package imageLoader\exceptions
+ * @package ImageLoader\exceptions
  */
 class UrlException extends \Exception{
     /**

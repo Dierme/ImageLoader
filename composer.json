@@ -1,6 +1,6 @@
 {
 
-  "name": "dierme/image-loader",
+  "name": "dierme/loader",
   "description": "Downloads an image by a direct link.",
   "authors": [
     {
@@ -8,9 +8,9 @@
       "email": "kalimdor07@gmail.com"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "autoload": {
-    "psr-4": {"imageLoader\\": "imageLoader/"}
+    "psr-4": {"ImageLoader\\": "ImageLoader/"}
   },
   "require": {
     "php": ">=5.3.0"

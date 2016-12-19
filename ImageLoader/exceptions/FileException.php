@@ -1,12 +1,12 @@
 <?php
 
-namespace imageLoader\exceptions;
+namespace ImageLoader\exceptions;
 
 /**
  * Class FileException
  * Custom exceptions which signalize that there is an issue with specific file
  *
- * @package imageLoader\exceptions
+ * @package ImageLoader\exceptions
  */
 class FileException extends \Exception{
     /**
