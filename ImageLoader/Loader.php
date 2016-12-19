@@ -1,9 +1,9 @@
 <?php
 
-namespace dierme\loader\ImageLoader;
+namespace dierme\loader;
 
-use dierme\loader\ImageLoader\exceptions\UrlException;
-use dierme\loader\ImageLoader\exceptions\FileException;
+use dierme\loader\exceptions\UrlException;
+use dierme\loader\exceptions\FileException;
 
 /**
  * Class Loader
@@ -20,6 +20,8 @@ class Loader{
 
     function __construct(){
         $this->params = require(__DIR__ . '/config/params.php');
+
+        $this->validateParams();
     }
 
 
@@ -163,7 +165,13 @@ class Loader{
      * @throws FileException        throw, if file name exists
      */
     private function imageNameNotExists($name, $extension){
+        if(!file_exists($this->params['path'])){
+            $message = 'Folder for saving images does not exist :';
+            throw new FileException($message, $this->params['path']);
+        }
+
         $folderContent = scandir($this->params['path']);
+
         $fullName = $name.'.'.$extension;
         if(in_array($fullName, $folderContent)){
             $message = 'File already exists :';
@@ -198,6 +206,33 @@ class Loader{
         $imageInfo = getimagesize($path);
         $stringPieces = explode('/', $imageInfo['mime']);
         return $stringPieces[1];
+    }
+
+
+    /**
+     * Sets path to folder, where images are saved
+     * Mainly for tests purposes
+     *
+     * @return string
+     */
+    public function setPath($path){
+        $this->params['path'] = $path;
+        return $this->validateParams();
+    }
+
+    /**
+     * Checks that all params are set properly
+     *
+     * @throws \Exception       Thrown if an error in params is found
+     */
+    private function validateParams(){
+        if( !isset($this->params['path']) || $this->params['path'] == '' || !file_exists($this->params['path']) ){
+            throw new \Exception('Path to store folder is not set');
+        }
+        elseif( !isset($this->params['allowedExtensions']) || !is_array($this->params['allowedExtensions']) ){
+            throw new \Exception('params[allowedExtensions] should be set as array');
+        }
+        return true;
     }
 }
 ?>

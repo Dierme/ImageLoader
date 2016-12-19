@@ -14,7 +14,7 @@ class LoaderTest extends TestCase{
      */
     public function testGetImgReturnsFalseOnInvalidUrl()
     {
-        $loader = new \imageLoader\Loader();
+        $loader = new dierme\loader\Loader();
         $url = "123ssaa";
 
         $response = $loader->getimg($url, 'test');
@@ -28,7 +28,7 @@ class LoaderTest extends TestCase{
      */
     public function testGetImgReturnsFalseOnUnavailableUrl()
     {
-        $loader = new \imageLoader\Loader();
+        $loader = new dierme\loader\Loader();
         $url = "https://en.wikipedia.org/static/images/project-logos/";
 
         $response = $loader->getimg($url, 'test');
@@ -42,7 +42,7 @@ class LoaderTest extends TestCase{
      */
     public function testGetImgReturnsFalseOnInvalidUrlContent()
     {
-        $loader = new \imageLoader\Loader();
+        $loader = new \dierme\loader\Loader();
         $url = "https://www.facebook.com/";
 
         $response = $loader->getimg($url, 'test');
@@ -57,52 +57,47 @@ class LoaderTest extends TestCase{
      */
     public function testGetImgReturnsFalseIfImgNameExists()
     {
-        fopen("images/LongHardNameNoOneEverGoingToUse.png", "w");
+        $path = __DIR__.'/images';
+        $fileName = 'LongHardNameNoOneEverGoingToUse';
+        mkdir($path, 777);
+        fopen("$path/$fileName.png", "w");
 
-        $loader = new \imageLoader\Loader();
+
+        $loader = new \dierme\loader\Loader();
+        $loader->setPath($path);
 
         $url = "https://en.wikipedia.org/static/images/project-logos/enwiki.png";
 
-        $response = $loader->getimg($url, 'LongHardNameNoOneEverGoingToUse');
+        $response = $loader->getimg($url, $fileName);
 
         $this->assertFalse($response['success']);
 
-        unlink('images/LongHardNameNoOneEverGoingToUse.png');
+        unlink("$path/$fileName.png");
+        rmdir($path);
     }
 
 
     /**
-     * True should be returned in $response['success']
+     * True should be returned in $response['success'] and file should exist in FS
      * if url is valid
      */
     public function testGetImgReturnsTrueOnValidUrl()
     {
-        $loader = new \imageLoader\Loader();
+        $path = __DIR__.'/images';
+        $fileName = 'LongHardNameNoOneEverGoingToUse';
+        mkdir($path, 777);
+
+        $loader = new \dierme\loader\Loader();
+        $loader->setPath($path);
         $url = "https://en.wikipedia.org/static/images/project-logos/enwiki.png";
 
-        $response = $loader->getimg($url, 'LongHardNameNoOneEverGoingToUse2');
+        $response = $loader->getimg($url, $fileName);
 
         $this->assertTrue($response['success']);
-
-        unlink('images/LongHardNameNoOneEverGoingToUse2.png');
-    }
-
-
-    /**
-     * Image should exist in file system after downloading
-     */
-    public function testGetImgSavesImageOnFileSystem()
-    {
-
-        $loader = new \imageLoader\Loader();
-
-        $url = "https://en.wikipedia.org/static/images/project-logos/enwiki.png";
-
-        $response = $loader->getimg($url, 'LongHardNameNoOneEverGoingToUse');
-
         $this->assertTrue(file_exists($response['imgPath']));
 
-        unlink('images/LongHardNameNoOneEverGoingToUse.png');
+        unlink("$path/$fileName.png");
+        rmdir($path);
     }
 
 }
