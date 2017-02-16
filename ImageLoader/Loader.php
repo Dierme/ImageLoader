@@ -203,15 +203,15 @@ class Loader
 //     *
 //     * @throws \Exception       Thrown if an error in params is found
 //     */
-//    private function validateParams()
-//    {
-//        if (!isset($this->params['path']) || $this->params['path'] == '' || !file_exists($this->params['path'])) {
-//            throw new \Exception('Path to store folder is not set');
-//        } elseif (!isset($this->params['allowedExtensions']) || !is_array($this->params['allowedExtensions'])) {
-//            throw new \Exception('params[allowedExtensions] should be set as array');
-//        }
-//        return true;
-//    }
+    private function validateParams()
+    {
+        if (!isset($this->params['path']) || $this->params['path'] == '' || !file_exists($this->params['path'])) {
+            throw new \Exception('Path to store folder is not set');
+        } elseif (!isset($this->params['allowedExtensions']) || !is_array($this->params['allowedExtensions'])) {
+            throw new \Exception('params[allowedExtensions] should be set as array');
+        }
+        return true;
+    }
 }
 
 ?>
