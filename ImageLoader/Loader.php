@@ -4,7 +4,9 @@ namespace dierme\loader;
 
 use dierme\loader\exceptions\UrlException;
 use dierme\loader\exceptions\FileException;
+use dierme\loader\models\ImageModel;
 use dierme\loader\models\UrlModel;
+use dierme\loader\generators\SecureSrtGenerator;
 
 /**
  * Class Loader
@@ -30,13 +32,25 @@ class Loader
     public function download($url)
     {
         $urlModel = new UrlModel();
+
         $urlModel->setAttribute('url', $url);
-        if ($urlModel->validate()) {
-            print ('validated');
+
+        if (!$urlModel->validate()) {
+            return $urlModel->getErrors();
         }
-        else{
-            print ('not validated');
+
+        $generator = new SecureSrtGenerator();
+
+        $imageModel = new ImageModel();
+
+        $imageModel->setAttribute('name', $generator->generateFileName(15));
+
+        $imageModel->setAttribute('extension', $urlModel->getResourceExtension());
+
+        if($imageModel->validate()){
+            $imageModel->uploadFromUrl($urlModel, $this->params);
         }
+
     }
 
 //

@@ -12,9 +12,12 @@ use dierme\loader\models\Model;
 
 class ImageValidator implements IValidator
 {
+    /**
+     * @inheritdoc
+     */
     public function validateAttribute(Model $model, $attribute)
     {
-        // TODO: Implement validateAttribute() method.
+
     }
 
 }
