@@ -9,7 +9,7 @@
 namespace dierme\loader\exceptions;
 
 
-class ConfigurationException
+class ConfigurationException extends \Exception
 {
 
 }
