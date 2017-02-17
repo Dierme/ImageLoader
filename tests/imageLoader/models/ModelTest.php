@@ -34,4 +34,11 @@ class ModelTest extends TestCase
         $this->assertEquals($this->model->errors['key'], 'value');
     }
 
+    public function testHasErrors()
+    {
+        $this->model->addError('key', 'value');
+
+        $this->assertTrue($this->model->hasErrors());
+    }
+
 }
