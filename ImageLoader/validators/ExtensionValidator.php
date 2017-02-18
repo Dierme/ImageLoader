@@ -31,8 +31,9 @@ class ExtensionValidator implements IValidator
 
             $this->allowedExtensions = $params['allowedExtensions'];
         }
-
-        $this->allowedExtensions = $allowedExtensions;
+        else{
+            $this->allowedExtensions = $allowedExtensions;
+        }
     }
 
 
