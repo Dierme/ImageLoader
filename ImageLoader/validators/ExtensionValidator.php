@@ -23,7 +23,7 @@ class ExtensionValidator implements IValidator
     public function __construct(array $allowedExtensions = [])
     {
         if (empty($allowedExtensions)) {
-            $params = require(__DIR__ . '../config/params.php');
+            $params = require(__DIR__ . '/../config/params.php');
 
             if (empty($params['allowedExtensions'])) {
                 throw new  ConfigurationException('property allowedExtensions is not set in config');
@@ -45,7 +45,7 @@ class ExtensionValidator implements IValidator
             return true;
         }
 
-        if (in_array($model->$attribute, $this->allowedExtensions)) {
+        if (in_array($model->getAttribute($attribute), $this->allowedExtensions)) {
             return true;
         }
 

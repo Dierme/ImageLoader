@@ -19,10 +19,10 @@ class UrlValidator implements IValidator
      */
     public function validateAttribute(Model $model, $attribute)
     {
-        if (!$this->urlIsValid($model->$attribute)) {
+        if (!$this->urlIsValid($model->getAttribute($attribute))) {
             $model->addError($attribute, 'Url is not valid');
             return false;
-        } elseif (!$this->urlIsAvailable($model->$attribute)) {
+        } elseif (!$this->urlIsAvailable($model->getAttribute($attribute))) {
             $model->addError($attribute, 'Url is not available');
             return false;
         }
