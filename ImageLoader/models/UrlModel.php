@@ -12,6 +12,7 @@ namespace dierme\loader\models;
 use dierme\loader\exceptions\ModelException;
 use dierme\loader\exceptions\UrlException;
 use dierme\loader\validators\UrlValidator;
+use dierme\loader\validators\ContentImageValidator;
 
 class UrlModel extends Model
 {
@@ -26,7 +27,7 @@ class UrlModel extends Model
     public function rules()
     {
         return [
-            'url' => UrlValidator::class
+            'url' => [UrlValidator::class, ContentImageValidator::class]
         ];
     }
 

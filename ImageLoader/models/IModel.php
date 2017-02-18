@@ -19,10 +19,12 @@ interface IModel
     public function validate();
 
     /**
-     * Returns validation errors
+     * Returns validation errors.
+     * If key is set, returns errors by key
+     * @param $key
      * @return array
      */
-    public function getErrors();
+    public function getErrors($key = false);
 
     /**
      * Adds error to Model
@@ -38,6 +40,19 @@ interface IModel
      */
     public function hasErrors();
 
+    /**
+     * Sets model attribute
+     * @param $attribute
+     * @param $value
+     * @return bool
+     */
     public function setAttribute($attribute, $value);
+
+    /**
+     * Gets model attribute
+     * @param $attribute
+     * @return mixed
+     */
+    public function getAttribute($attribute);
 
 }

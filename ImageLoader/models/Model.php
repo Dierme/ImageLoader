@@ -28,9 +28,7 @@ abstract class Model implements IModel
     }
 
     /**
-     * @param $attribute
-     * @param $value
-     * @throws ModelException
+     * @inheritdoc
      */
     public function setAttribute($attribute, $value)
     {
@@ -39,6 +37,17 @@ abstract class Model implements IModel
         }
 
         $this->$attribute = $value;
+
+        return true;
+    }
+
+    public function getAttribute($attribute)
+    {
+        if (!isset($this->$attribute)) {
+            throw new ModelException($attribute . ' attribute is not found');
+        }
+
+        return $this->$attribute;
     }
 
     /**
@@ -56,8 +65,12 @@ abstract class Model implements IModel
     /**
      * @inheritdoc
      */
-    public function getErrors()
+    public function getErrors($key = false)
     {
+        if ($key && !empty($this->errors[$key])) {
+            return $this->errors[$key];
+        }
+
         return $this->errors;
     }
 
@@ -66,7 +79,7 @@ abstract class Model implements IModel
      */
     public function addError($key, $message)
     {
-        $this->errors[$key] = $message;
+        $this->errors[$key][] = $message;
         return true;
     }
 
@@ -76,10 +89,16 @@ abstract class Model implements IModel
     public function validate()
     {
         foreach ($this->rules() as $attribute => $validator) {
-            $validator = new $validator();
-            $validator->validateAttribute($this, $attribute);
+            if (is_array($validator)) {
+                foreach ($validator as $className) {
+                    $validatorObject = new $className();
+                    $validatorObject->validateAttribute($this, $attribute);
+                }
+            } else {
+                $validatorObject = new $validator();
+                $validatorObject->validateAttribute($this, $attribute);
+            }
         }
-
         return !$this->hasErrors();
     }
 
