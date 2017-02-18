@@ -1,12 +1,15 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use dierme\loader\Loader;
 
-/**
- * Class LoaderTest
- *
- * Test functionality if Loader class
- */
-class LoaderTest extends TestCase{
 
+class LoaderTest extends TestCase
+{
+    public function testNameIsUniqueReturnsFalseIfNameExists()
+    {
+        $path = __DIR__;
+        $loader = new Loader();
+        $this->assertFalse($loader->nameIsUnique($path, 'LoaderTest', 'php'));
+    }
 }
