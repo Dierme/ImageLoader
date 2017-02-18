@@ -59,28 +59,28 @@ class SecureSrtGenerator
 
     protected function getAlphaSmallSymbol()
     {
-        $index = (int)rand(-0.5, count($this->alphaSmall));
+        $index = (int)(rand(1, count($this->alphaSmall)) - 1);
 
         return $this->alphaSmall[$index];
     }
 
     protected function getAlphaBigSymbol()
     {
-        $index = (int)rand(-0.5, count($this->alphaBig));
+        $index = (int)(rand(1, count($this->alphaBig)) - 1);
 
         return $this->alphaBig[$index];
     }
 
     protected function getNumericSymbol()
     {
-        $index = (int)rand(-0.5, count($this->numbers));
+        $index = (int)(rand(1, count($this->numbers)) - 1);
 
         return $this->numbers[$index];
     }
 
     protected function getSpecialSymbol()
     {
-        $index = (int)rand(-0.5, count($this->numbers));
+        $index = (int)(rand(1, count($this->numbers)) - 1);
 
         return $this->numbers[$index];
     }
