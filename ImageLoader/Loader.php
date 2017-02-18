@@ -58,7 +58,7 @@ class Loader
 
         return [
             'success' => true,
-            'image' => $imageModel->name . $imageModel->extension
+            'image' => $imageModel->name . '.' . $imageModel->extension
         ];
     }
 
